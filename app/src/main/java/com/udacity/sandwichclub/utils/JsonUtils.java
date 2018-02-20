@@ -40,11 +40,11 @@ public final class JsonUtils {
 
     }
 
-    private static String getMainName(JSONObject sandwich){
+    private static String getMainName(JSONObject sandwich) throws JSONException {
         return sandwich.optString(MAIN_NAME);
     }
 
-    private static List<String> getAlsoKnowAs(JSONObject sandwich){
+    private static List<String> getAlsoKnowAs(JSONObject sandwich) throws JSONException {
         List<String> stringList = new ArrayList<>();
         JSONArray jsonArray = sandwich.optJSONArray(ALSO_KNOWN_AS);
         if (jsonArray != null){
@@ -55,19 +55,19 @@ public final class JsonUtils {
         return stringList;
     }
 
-    private static String getPlaceOfOrigin(JSONObject sandwich){
+    private static String getPlaceOfOrigin(JSONObject sandwich) throws JSONException {
         return sandwich.optString(PLACE_OF_ORIGIN);
     }
 
-    private static String getDescription(JSONObject sandwich){
+    private static String getDescription(JSONObject sandwich) throws JSONException {
         return sandwich.optString(DESCRIPTION);
     }
 
-    private static String getImage(JSONObject sandwich){
+    private static String getImage(JSONObject sandwich) throws JSONException {
         return sandwich.optString(IMAGE);
     }
 
-    private static List<String> getIngredients (JSONObject sandwich){
+    private static List<String> getIngredients (JSONObject sandwich) throws JSONException {
         List<String> stringList = new ArrayList<>();
         JSONArray jsonArray = sandwich.optJSONArray(INGREDIENTS);
         if (jsonArray != null){
