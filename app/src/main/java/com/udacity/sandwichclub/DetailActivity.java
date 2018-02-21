@@ -66,10 +66,10 @@ public class DetailActivity extends AppCompatActivity {
         TextView descriptionTv = findViewById(R.id.description_tv);
         TextView ingredients = findViewById(R.id.ingredients_tv);
 
-        alsoKnowASTv.setText(sandwich.getAlsoKnownAs().toString());
+        alsoKnowASTv.setText(TextUtils.join("\n", sandwich.getAlsoKnownAs()));
         originTv.setText(sandwich.getPlaceOfOrigin());
         descriptionTv.setText(sandwich.getDescription());
-        ingredients.setText(sandwich.getIngredients().toString());
+        ingredients.setText(TextUtils.join("\n",sandwich.getIngredients()));
 
 
     }
