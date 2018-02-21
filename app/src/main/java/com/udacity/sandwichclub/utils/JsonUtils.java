@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Utility functions to handle JSON data.
  * Created by seridan on 19/02/2018.
  */
 
@@ -25,6 +26,8 @@ public final class JsonUtils {
     private static final String IMAGE = "image";
     private static final String INGREDIENTS = "ingredients";
     private static final String TAG = JsonUtils.class.toString();
+
+
 
     public static Sandwich parseSandwichJson (String json)  {
 
@@ -54,11 +57,10 @@ public final class JsonUtils {
         List<String> stringList = new ArrayList<>();
         if (name != null) {
             JSONArray jsonArray = name.optJSONArray(ALSO_KNOWN_AS);
-            if (jsonArray != null) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     stringList.add((String) jsonArray.opt(i));
                 }
-            }
+
         }
         return stringList;
     }
@@ -78,11 +80,10 @@ public final class JsonUtils {
     private static List<String> getIngredients (JSONObject sandwich) throws JSONException {
         List<String> stringList = new ArrayList<>();
         JSONArray jsonArray = sandwich.optJSONArray(INGREDIENTS);
-        if (jsonArray != null){
             for (int i = 0; i < jsonArray.length(); i++){
                 stringList.add((String)jsonArray.opt(i));
             }
-        }
+
         return stringList;
     }
 }

@@ -60,17 +60,26 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
+    private void checkAndSetTex (String s,TextView textView){
+        if (TextUtils.isEmpty(s)){
+            textView.setText(R.string.sandwich_error_message);
+        }else {
+            textView.setText(s);
+        }
+    }
+
     private void populateUI(Sandwich sandwich) {
         TextView alsoKnowASTv = findViewById(R.id.also_known_tv);
         TextView originTv = findViewById(R.id.origin_tv);
         TextView descriptionTv = findViewById(R.id.description_tv);
-        TextView ingredients = findViewById(R.id.ingredients_tv);
+        TextView ingredientsTv = findViewById(R.id.ingredients_tv);
 
-        alsoKnowASTv.setText(TextUtils.join("\n", sandwich.getAlsoKnownAs()));
-        originTv.setText(sandwich.getPlaceOfOrigin());
-        descriptionTv.setText(sandwich.getDescription());
-        ingredients.setText(TextUtils.join("\n",sandwich.getIngredients()));
-
+        checkAndSetTex(TextUtils.join("\n", sandwich.getAlsoKnownAs()), alsoKnowASTv);
+        checkAndSetTex(sandwich.getPlaceOfOrigin(),originTv);
+        checkAndSetTex(sandwich.getDescription(), descriptionTv);
+        checkAndSetTex(TextUtils.join("\n",sandwich.getIngredients()), ingredientsTv);
 
     }
+
+
 }
