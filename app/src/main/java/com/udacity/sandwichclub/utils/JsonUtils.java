@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * Utility functions to handle JSON data.
  * Created by seridan on 19/02/2018.
+ * Fonts https://geekytheory.com/trabajando-con-json-en-android
  */
 
 public final class JsonUtils {
