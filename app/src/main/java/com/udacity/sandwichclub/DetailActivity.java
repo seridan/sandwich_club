@@ -25,12 +25,12 @@ public class DetailActivity extends AppCompatActivity {
         ImageView ingredientsIv = findViewById(R.id.image_iv);
 
 
-
         Intent intent = getIntent();
         if (intent == null) {
             closeOnError();
         }
 
+        /*Get the position form selected sandwich in mainActivity.*/
         int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
         if (position == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
@@ -38,8 +38,12 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
+        /*Create an array with all sandwich details wich are in strings.xml in JSON format
+        * Then get the JSON string according to the position selected*/
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
+        /*Now parsing the JSON string using the parseSandwichJson method from JsonUtils class
+        * into a Sandwich object*/
         Sandwich sandwich = JsonUtils.parseSandwichJson(json);
         if (sandwich == null) {
             // Sandwich data unavailable
@@ -60,14 +64,25 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void checkAndSetTex (String s,TextView textView){
-        if (TextUtils.isEmpty(s)){
+    /**
+     * This method check if there is value to set in the TextxView. If not will set the error message.
+     *
+     * @param s        string which represent the text that is set.
+     * @param textView corresponding with the textView to set the data.
+     */
+    private void checkAndSetTex(String s, TextView textView) {
+        if (TextUtils.isEmpty(s)) {
             textView.setText(R.string.sandwich_error_message);
-        }else {
+        } else {
             textView.setText(s);
         }
     }
 
+    /**
+     * This method populate the Details textViews.
+     *
+     * @param sandwich Sandwich object.
+     */
     private void populateUI(Sandwich sandwich) {
         TextView alsoKnowASTv = findViewById(R.id.also_known_tv);
         TextView originTv = findViewById(R.id.origin_tv);
@@ -75,11 +90,10 @@ public class DetailActivity extends AppCompatActivity {
         TextView ingredientsTv = findViewById(R.id.ingredients_tv);
 
         checkAndSetTex(TextUtils.join("\n", sandwich.getAlsoKnownAs()), alsoKnowASTv);
-        checkAndSetTex(sandwich.getPlaceOfOrigin(),originTv);
+        checkAndSetTex(sandwich.getPlaceOfOrigin(), originTv);
         checkAndSetTex(sandwich.getDescription(), descriptionTv);
-        checkAndSetTex(TextUtils.join("\n",sandwich.getIngredients()), ingredientsTv);
+        checkAndSetTex(TextUtils.join("\n", sandwich.getIngredients()), ingredientsTv);
 
     }
-
 
 }

@@ -28,7 +28,12 @@ public final class JsonUtils {
     private static final String TAG = JsonUtils.class.toString();
 
 
-
+    /**
+     * The method parsing a String object with json format and returns
+     * an object of the sandwich class using the methods below.
+     * @param json String object with json format.
+     * @return an object of the sandwich class.
+     */
     public static Sandwich parseSandwichJson (String json)  {
 
         JSONObject parsedSandwich = null;
@@ -44,19 +49,31 @@ public final class JsonUtils {
 
     }
 
-    private static String getMainName(JSONObject sandwich) throws JSONException {
-        JSONObject name = sandwich.optJSONObject(NAME);
-        if (name != null){
-            return name.optString(MAIN_NAME);
+    /**
+     * Method to parse and return the main name string of the sandwich object.
+     * @param sandwichJson
+     * @return String that contains sandwich main name's.
+     * @throws JSONException
+     */
+    private static String getMainName(JSONObject sandwichJson) throws JSONException {
+        JSONObject nameJson = sandwichJson.optJSONObject(NAME);
+        if (nameJson != null){
+            return nameJson.optString(MAIN_NAME);
         }
         return null;
     }
 
-    private static List<String> getAlsoKnowAs(JSONObject sandwich) throws JSONException {
-        JSONObject name = sandwich.optJSONObject(NAME);
+    /**
+     * Method to parse and return the Also KnownAs List String's of the sandwich object.
+     * @param sandwichJson
+     * @return List Strings that contains sandwich AlsoKnowAs's.
+     * @throws JSONException
+     */
+    private static List<String> getAlsoKnowAs(JSONObject sandwichJson) throws JSONException {
+        JSONObject nameJson = sandwichJson.optJSONObject(NAME);
         List<String> stringList = new ArrayList<>();
-        if (name != null) {
-            JSONArray jsonArray = name.optJSONArray(ALSO_KNOWN_AS);
+        if (nameJson != null) {
+            JSONArray jsonArray = nameJson.optJSONArray(ALSO_KNOWN_AS);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     stringList.add((String) jsonArray.opt(i));
                 }
@@ -65,21 +82,45 @@ public final class JsonUtils {
         return stringList;
     }
 
-    private static String getPlaceOfOrigin(JSONObject sandwich) throws JSONException {
-        return sandwich.optString(PLACE_OF_ORIGIN);
+    /**
+     * Method to parse and return the place of origin String of the sandwich object.
+     * @param sandwichJson
+     * @return String of place of origin
+     * @throws JSONException
+     */
+    private static String getPlaceOfOrigin(JSONObject sandwichJson) throws JSONException {
+        return sandwichJson.optString(PLACE_OF_ORIGIN);
     }
 
-    private static String getDescription(JSONObject sandwich) throws JSONException {
-        return sandwich.optString(DESCRIPTION);
+    /**
+     * Method to parse and return the description String of the sandwich object.
+     * @param sandwichJson
+     * @return String of description
+     * @throws JSONException
+     */
+    private static String getDescription(JSONObject sandwichJson) throws JSONException {
+        return sandwichJson.optString(DESCRIPTION);
     }
 
-    private static String getImage(JSONObject sandwich) throws JSONException {
-        return sandwich.optString(IMAGE);
+    /**
+     * Method to parse and return the image String of the sandwich object.
+     * @param sandwichJson
+     * @return String of image
+     * @throws JSONException
+     */
+    private static String getImage(JSONObject sandwichJson) throws JSONException {
+        return sandwichJson.optString(IMAGE);
     }
 
-    private static List<String> getIngredients (JSONObject sandwich) throws JSONException {
+    /**
+     * Method to parse and return the ingredients List String of the sandwich object.
+     * @param sandwichJson
+     * @return  List String of ingredients
+     * @throws JSONException
+     */
+    private static List<String> getIngredients (JSONObject sandwichJson) throws JSONException {
         List<String> stringList = new ArrayList<>();
-        JSONArray jsonArray = sandwich.optJSONArray(INGREDIENTS);
+        JSONArray jsonArray = sandwichJson.optJSONArray(INGREDIENTS);
             for (int i = 0; i < jsonArray.length(); i++){
                 stringList.add((String)jsonArray.opt(i));
             }
